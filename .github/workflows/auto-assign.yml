@@ -1,3 +1,5 @@
+name: 'Auto Assign'
+
 # Set to true to add assignees to pull requests
 addAssignees: true
 
