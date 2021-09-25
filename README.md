@@ -18,7 +18,7 @@ Host someinternalhost
 После этого можно подключаться к someinternalhost с рабочей машины с помощью команды `ssh someinternalhost`
 
 ### VPN
-bastion_IP = 62.84.117.136\
+bastion_IP = 62.84.117.136 \
 someinternalhost_IP = 10.128.0.7
 
 ### Дополнительное задание
