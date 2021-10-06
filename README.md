@@ -64,8 +64,10 @@ yc compute instance create \
 # ==> yandex: E: Unable to acquire the dpkg frontend lock (/var/lib/dpkg/lock-frontend), is another process using it?
 ```
 
-Проблему решил добавлением параметра `max_retries` в провижнер. Выставил значение 5, но обычно срабатывает на 2й раз.
-Причина проблемы неясна, но по симптомам похоже на [это](https://github.com/actions/virtual-environments/issues/1120)
+~~Проблему решил добавлением параметра `max_retries` в провижнер. Выставил значение 5, но обычно срабатывает на 2й раз.~~
+~~Причина проблемы неясна, но по симптомам похоже на [это](https://github.com/actions/virtual-environments/issues/1120)~~
+
+__UPD:__ Параметр пришлось убрать, т.к. Packer из автопроверки не знает про такой параметр
 
 ### Дополнительное задание № 1 (Построение baked образа)
 В качестве основы для создания baked образа был использован `ubuntu16.json` из основного задания.
