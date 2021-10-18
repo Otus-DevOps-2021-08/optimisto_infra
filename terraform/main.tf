@@ -16,7 +16,7 @@ provider "yandex" {
 
 resource "yandex_compute_instance" "app" {
   count = var.backends_count
-  name = "reddit-app-${count.index}"
+  name  = "reddit-app-${count.index}"
 
   metadata = {
     ssh-keys = "ubuntu:${file(var.public_key_path)}"
