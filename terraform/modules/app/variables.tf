@@ -16,5 +16,9 @@ variable "private_key_path" {
 
 variable "user" {
   description = "Username to access instance via SSH"
-  default = "ubuntu"
+  default     = "ubuntu"
+}
+
+variable "database_url" {
+  description = "Database url"
 }

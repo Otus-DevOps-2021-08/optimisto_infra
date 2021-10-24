@@ -11,6 +11,7 @@ module "app" {
   private_key_path = var.private_key_path
   app_disk_image   = var.app_disk_image
   subnet_id        = var.subnet_id
+  database_url     = "${module.db.database_url}"
 }
 
 module "db" {

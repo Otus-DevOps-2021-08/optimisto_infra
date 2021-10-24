@@ -32,12 +32,7 @@ resource "yandex_compute_instance" "db" {
     private_key = file(var.private_key_path)
   }
 
-  #   provisioner "file" {
-  #     source      = "../packer/files/reddit.service"
-  #     destination = "/tmp/puma.service"
-  #   }
-
-  #   provisioner "remote-exec" {
-  #     script = "./files/deploy.sh"
-  #   }
+  provisioner "remote-exec" {
+    script = "${path.module}/files/rebind_mongodb.sh"
+  }
 }

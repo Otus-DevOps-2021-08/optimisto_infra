@@ -39,8 +39,3 @@ variable "app_port" {
   description = "Application port"
   default     = 9292
 }
-
-variable "backends_count" {
-  description = "Backends count"
-  default     = 1
-}
