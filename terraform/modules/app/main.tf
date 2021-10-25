@@ -1,16 +1,11 @@
-provider "yandex" {
-  service_account_key_file = var.service_account_key_file
-  cloud_id                 = var.cloud_id
-  folder_id                = var.folder_id
-  zone                     = var.zone
-}
-
 resource "yandex_compute_instance" "app" {
-  count = var.backends_count
-  name  = "reddit-app-${count.index}"
+  name = "reddit-app"
+  labels = {
+    tags = "reddit-app"
+  }
 
   metadata = {
-    ssh-keys = "ubuntu:${file(var.public_key_path)}"
+    ssh-keys = "${var.user}:${file(var.public_key_path)}"
   }
 
   resources {
@@ -20,7 +15,7 @@ resource "yandex_compute_instance" "app" {
 
   boot_disk {
     initialize_params {
-      image_id = var.image_id
+      image_id = var.app_disk_image
     }
   }
 
@@ -32,17 +27,23 @@ resource "yandex_compute_instance" "app" {
   connection {
     type        = "ssh"
     host        = self.network_interface.0.nat_ip_address
-    user        = "ubuntu"
+    user        = var.user
     agent       = false
     private_key = file(var.private_key_path)
   }
 
   provisioner "file" {
-    source      = "../packer/files/reddit.service"
+    source      = "${path.module}/files/puma.service"
     destination = "/tmp/puma.service"
   }
 
   provisioner "remote-exec" {
-    script = "./files/deploy.sh"
+    inline = [
+      "sed -i 's/%DATABASE_URL%/${var.database_url}/g' /tmp/puma.service"
+    ]
+  }
+
+  provisioner "remote-exec" {
+    script = "${path.module}/files/deploy.sh"
   }
 }

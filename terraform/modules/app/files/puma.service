@@ -1,0 +1,14 @@
+[Unit]
+Description=Reddit app
+After=network.target
+
+[Service]
+Type=simple
+User=ubuntu
+WorkingDirectory=/home/ubuntu/reddit
+ExecStart=/usr/local/bin/puma
+Restart=always
+Environment="DATABASE_URL=%DATABASE_URL%"
+
+[Install]
+WantedBy=multi-user.target
