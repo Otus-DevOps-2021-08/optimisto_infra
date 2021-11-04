@@ -158,7 +158,7 @@ Environment="DATABASE_URL=%DATABASE_URL%"
 
 ### Дополнительное задание № 1
 
-Для динамического inventory был написан скрипт `dynamic_inventory.py`.
+Для динамического inventory был написан скрипт `dynamic_inventory.py`. Скрипт на основе вывода команды `terraform show | python -m json.tool` (в репозитарий залит пример вывода команды) формирует список инвентори. При этом IP адреса из выходных переменных, содержащие инфикс `db`/`app`, попадают в соответствующую группу хостов. Как вариант, можно было делать такую логику на основе labels.
 
 Требования к скрипту взяты из [документации Ansible](https://docs.ansible.com/ansible/2.5/dev_guide/developing_inventory.html#script-conventions).
 
