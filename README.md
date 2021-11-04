@@ -141,3 +141,30 @@ Environment="DATABASE_URL=%DATABASE_URL%"
 ```
 
 Также в модуль `app` был добавлен provisioner remote-exec, который с помощью `sed` заменял `%DATABASE_URL%` на реальный адрес MongoDB в `puma.service`
+
+## Домашнее задание № 8 (Управление конфигурацией. Основные DevOps инструменты. Знакомство с Ansible)
+
+### Основное задание
+
+> Теперь выполните ansible app -m command -a 'rm -rf ~/reddit' и проверьте еще раз выполнение плейбука. Что изменилось и почему? Добавьте информацию в README.md.
+
+До выполнения команды `rm` - `appserver                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0`
+После выполенения команды  - `appserver                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0`
+
+Как видно, поменялось значение `changed`, указывающее на количество тасок, которые изменили что-то на хосте.
+
+До выполнения `rm` репозиторий уже существовал, поэтому изменений на хосте не произошло.
+
+### Дополнительное задание № 1
+
+Для динамического inventory был написан скрипт `dynamic_inventory.py`.
+
+Требования к скрипту взяты из [документации Ansible](https://docs.ansible.com/ansible/2.5/dev_guide/developing_inventory.html#script-conventions).
+
+Путь до скрипта указан в `ansible.cfg`
+
+Подхватывание динамического инвентори проверил запустив Ansible с расширенным логированием `ansible -vvvv app -m ping`
+
+В выводе команды присутствует следующая строка
+
+`Parsed /mnt/c/Projects/otus/optimisto_infra/ansible/dynamic_inventory.py inventory source with script plugin`
