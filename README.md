@@ -149,6 +149,7 @@ Environment="DATABASE_URL=%DATABASE_URL%"
 > Теперь выполните ansible app -m command -a 'rm -rf ~/reddit' и проверьте еще раз выполнение плейбука. Что изменилось и почему? Добавьте информацию в README.md.
 
 До выполнения команды `rm` - `appserver                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0`
+
 После выполенения команды  - `appserver                  : ok=2    changed=1    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0`
 
 Как видно, поменялось значение `changed`, указывающее на количество тасок, которые изменили что-то на хосте.
