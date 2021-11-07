@@ -31,13 +31,6 @@
       service: puma
       enabled: yes
     tags: app-tag
-  - name: Install git
-    become: true
-    apt:
-      name: git
-      state: present
-      update_cache: yes
-    tags: deploy-tag
   - name: Fetch the lastest version of application code
     git:
       repo: 'https://github.com/express42/reddit.git'
