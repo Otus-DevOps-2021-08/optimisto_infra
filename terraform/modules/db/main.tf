@@ -31,8 +31,4 @@ resource "yandex_compute_instance" "db" {
     agent       = false
     private_key = file(var.private_key_path)
   }
-
-  provisioner "remote-exec" {
-    script = "${path.module}/files/rebind_mongodb.sh"
-  }
 }

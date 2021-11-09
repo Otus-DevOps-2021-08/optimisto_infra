@@ -5,3 +5,5 @@
 .terraform/
 iam-key.json
 packer/variables.json
+*.retry
+*__pycache__*

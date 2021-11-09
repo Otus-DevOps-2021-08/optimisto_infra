@@ -169,3 +169,43 @@ Environment="DATABASE_URL=%DATABASE_URL%"
 В выводе команды присутствует следующая строка
 
 `Parsed /mnt/c/Projects/otus/optimisto_infra/ansible/dynamic_inventory.py inventory source with script plugin`
+
+## Домашнее задание № 9 (Деплой и управление конфигурацией с Ansible)
+
+### Основное задание
+
+Пройдены все шаги основного домашнего задания. В качестве самостоятельной работы было сделано:
+
+1. Написан плейбук для деплоя приложения - `deploy.yml`
+2. Написаны плейбуки `packer_app.yml` и `packer_db.yml`
+3. Произведена замена bash скриптом на вызов провижнера ansible в конфигурации образов Packer, сами образы пересозданы.
+
+### Дополнительное задание
+
+В качестве динамического inventory для Яндекс.Облака был выбран плагин `yc_compute.py` из PR https://github.com/ansible-collections/community.general/pull/772 (с небольшими изменениями). Имя плагина было переименовано с `community.general.yc_compute` на просто `yc_compute` - иначе ansible грузил коллекцию `community.general`, не находил там нужного плагина и завершался с ошибкой.
+
+Было сделано следующее:
+1. Файл `yc_compute.py` был сохранен в директорию `ansible/plugins/inventory`.
+2. В `ansible.cfg` было добавлено
+
+```
+[defaults]
+inventory = inventory.yc.yml
+...
+inventory_plugins=./plugins/inventory
+
+[inventory]
+enable_plugins = yc_compute
+```
+3. Командой `ansible-doc -t inventory yc_compute` проверено наличие плагина (открылась документация)
+4. Создан файл `inventory.yc.yml` с описанием конфигурации плагина
+5. Установлен Yandex.Cloud SDK (`python3 -m pip install yandexcloud`)
+6. Переразвёрнута инфраструктура через Terraform (после была сделана ручная замена значения переменной `db_host`)
+7. Выполнена проверка корректного разбиения хостов по группам (`ansible-inventory --graph`)
+8. Запущен плейбук `ansible-playbook site.yml`
+
+Результат: по IP адресу приложения (app) открывается приложения Monolith.
+
+### Бонус
+
+Добавил в `.pre-commit-config.yaml` хук `ansible-lint`
