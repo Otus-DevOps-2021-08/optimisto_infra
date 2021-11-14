@@ -209,3 +209,7 @@ enable_plugins = yc_compute
 ### Бонус
 
 Добавил в `.pre-commit-config.yaml` хук `ansible-lint`
+
+## Домашнее задание № 10 (Ansible: работа с ролями и окружениями)
+
+![ansible-lint](https://github.com/Otus-DevOps-2021-08/optimisto_infra/.github/workflows/ansible_lint.yml/badge.svg?branch=ansible-3)
