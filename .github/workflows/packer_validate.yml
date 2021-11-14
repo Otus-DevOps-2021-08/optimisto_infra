@@ -14,17 +14,29 @@ jobs:
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v2
-
-      # fix backwards incompatibilities in template
-      - name: Fix Template
-        uses: hashicorp/packer-github-actions@master
         with:
-          command: fix
+          ref: ${{ github.ref }}
 
-      - name: Validate Template
+      - name: Validate App template
         uses: hashicorp/packer-github-actions@master
         with:
           command: validate
-          target: ./packer
-        env:
-          PACKER_LOG: 1
+          target: ./packer/app.json
+
+      - name: Validate Db template
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: validate
+          target: ./packer/db.json
+
+      - name: Validate immutable template
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: validate
+          target: ./packer/immutable.json
+
+      - name: Validate ubuntu16 template
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: validate
+          target: ./packer/ubuntu.json
