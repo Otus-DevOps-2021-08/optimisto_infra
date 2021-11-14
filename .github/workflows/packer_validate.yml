@@ -28,7 +28,7 @@ jobs:
         with:
           command: validate
           target: ./packer/app.json
-          arguments: "--var-file=variables.json"
+          arguments: "--var-file=variables.json --syntax-only"
 
       # - name: Validate Db template
       #   uses: hashicorp/packer-github-actions@master
