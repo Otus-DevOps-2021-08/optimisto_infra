@@ -18,6 +18,8 @@ jobs:
         ref: ${{ github.ref }}
 
     - uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_wrapper: false
     - name: Terraform Init
       id: init
       run: terraform init ./terraform/${{ matrix.environment }}
