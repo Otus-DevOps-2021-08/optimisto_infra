@@ -212,4 +212,38 @@ enable_plugins = yc_compute
 
 ## Домашнее задание № 10 (Ansible: работа с ролями и окружениями)
 
-[![Run Ansible Lint](https://github.com/Otus-DevOps-2021-08/optimisto_infra/actions/workflows/ansible_lint.yml/badge.svg?branch=ansible-3)](https://github.com/Otus-DevOps-2021-08/optimisto_infra/actions/workflows/ansible_lint.yml)
+### Основное задание
+
+Пройдены все шаги основного домашнего задания. В качестве самостоятельной работы было сделано:
+
+> Добавьте в конфигурацию Terraform открытие 80 порта для инстанса приложения
+> Добавьте вызов роли jdauphant.nginx в плейбук app.yml
+> Примените плейбук site.yml для окружения stage и проверьте, что приложение теперь доступно на 80 порту
+
+Дополнительных действий по открытию порта 80 не потребовалось. Приложение доступно как по :9292, так и по :80
+
+### Дополнительное задание №1 (Работа с динамическим инвентори)
+
+В предыдущем домашнем задании доп. задание с динамическим инветори было сделано.
+
+В нынешнем задании `inventory.yc.yml` был скопирован в `environments/(stage|prod)`
+
+При запуске плейбука требуется только указать нужный инвентори файл (`-i`).
+
+### Дополнительное задание №1 (Настройка Github Actions)
+
+Были написаны несколько конфигураций GitHub Action (в директории `.github/workflows`):
+- `packer_validate.yml` - для проверки конфигураций Packer
+- `ansible_lint.yml` - для проверки Ansible плейбуков
+- `terraform_validate.yml` - для проверки Terraform конфигураций (terraform validate и tflint)
+- в README.md добавлены бэйджи
+
+В конфигурациях Terraform пришлось заккоментировать `backend.tf` - иначе пришлось бы указывать реальные креды для доступа в бакету с шаренным состоянием. Как вариант: можно удалять эти файлы перед проверкой - в этом случае будет использоваться локальный tfstate.
+
+[![Run Ansible Lint](https://github.com/Otus-DevOps-2021-08/optimisto_infra/actions/workflows/ansible_lint.yml/badge.svg)](https://github.com/Otus-DevOps-2021-08/optimisto_infra/actions/workflows/ansible_lint.yml)
+
+[![Run Packer templates validation](https://github.com/Otus-DevOps-2021-08/optimisto_infra/actions/workflows/packer_validate.yml/badge.svg)](https://github.com/Otus-DevOps-2021-08/optimisto_infra/actions/workflows/packer_validate.yml)
+
+[![Run Terraform configs validation](https://github.com/Otus-DevOps-2021-08/optimisto_infra/actions/workflows/terraform_validate.yml/badge.svg)](https://github.com/Otus-DevOps-2021-08/optimisto_infra/actions/workflows/terraform_validate.yml)
+
+[![Run tests for OTUS homework](https://github.com/Otus-DevOps-2021-08/optimisto_infra/actions/workflows/run-tests.yml/badge.svg)](https://github.com/Otus-DevOps-2021-08/optimisto_infra/actions/workflows/run-tests.yml)

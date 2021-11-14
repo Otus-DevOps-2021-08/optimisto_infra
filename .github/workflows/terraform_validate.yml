@@ -18,7 +18,8 @@ jobs:
         ref: ${{ github.ref }}
 
     - uses: hashicorp/setup-terraform@v1
-
+      with:
+        terraform_version: 0.12.19
     - name: Terraform Init
       id: init
       run: terraform init
