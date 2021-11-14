@@ -8,8 +8,10 @@ on:
 
 jobs:
   packer:
+    strategy:
+      matrix:
+        packer-config: ["app.json", "db.json", "immutable.json", "ubuntu.json"]
     runs-on: ubuntu-latest
-    name: packer
 
     steps:
       - name: Checkout Repository
@@ -23,27 +25,9 @@ jobs:
           source: packer/variables.json.example
           target: variables.json
 
-      - name: Validate App template
+      - name: Validate template
         uses: hashicorp/packer-github-actions@master
         with:
           command: validate
-          target: ./packer/app.json
+          target: ./packer/${{ matrix.packer-config }}
           arguments: "--var-file=variables.json --syntax-only"
-
-      # - name: Validate Db template
-      #   uses: hashicorp/packer-github-actions@master
-      #   with:
-      #     command: validate
-      #     target: ./packer/db.json
-
-      # - name: Validate immutable template
-      #   uses: hashicorp/packer-github-actions@master
-      #   with:
-      #     command: validate
-      #     target: ./packer/immutable.json
-
-      # - name: Validate ubuntu16 template
-      #   uses: hashicorp/packer-github-actions@master
-      #   with:
-      #     command: validate
-      #     target: ./packer/ubuntu.json
