@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        environenment: ["stage", "prod"]
+        environment: ["stage", "prod"]
     steps:
     - uses: actions/checkout@v2
       with:
@@ -20,9 +20,29 @@ jobs:
     - uses: hashicorp/setup-terraform@v1
     - name: Terraform Init
       id: init
-      run: terraform init ./terraform/{{ matrix.environenment }}
-      working
+      run: terraform init ./terraform/{{ matrix.environment }}
 
     - name: Terraform Validate
       id: validate
-      run: terraform validate -no-color ./terraform/{{ matrix.environenment }}
+      run: terraform validate -no-color ./terraform/{{ matrix.environment }}
+  tflint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        environment: ["stage", "prod"]
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.ref }}
+
+    - uses: terraform-linters/setup-tflint@v1
+      name: Setup TFLint
+
+    - name: Show version
+      run: tflint --version
+
+    - name: Init TFLint
+      run: tflint --init  ./terraform/{{ matrix.environment }}
+
+    - name: Run TFLint
+      run: tflint -f checkstyle ./terraform/{{ matrix.environment }}
