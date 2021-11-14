@@ -10,7 +10,7 @@ jobs:
   packer:
     strategy:
       matrix:
-        packer-config: ["app.json", "db.json", "immutable.json", "ubuntu.json"]
+        packer-config: ["app.json", "db.json", "immutable.json", "ubuntu16.json"]
     runs-on: ubuntu-latest
 
     steps:
