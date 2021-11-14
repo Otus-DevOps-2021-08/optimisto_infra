@@ -212,4 +212,4 @@ enable_plugins = yc_compute
 
 ## Домашнее задание № 10 (Ansible: работа с ролями и окружениями)
 
-![ansible-lint](https://github.com/Otus-DevOps-2021-08/optimisto_infra/.github/workflows/ansible_lint.yml/badge.svg?branch=ansible-3)
+[![Run Ansible Lint](https://github.com/Otus-DevOps-2021-08/optimisto_infra/actions/workflows/ansible_lint.yml/badge.svg?branch=ansible-3)](https://github.com/Otus-DevOps-2021-08/optimisto_infra/actions/workflows/ansible_lint.yml)
