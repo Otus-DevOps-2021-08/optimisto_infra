@@ -17,26 +17,33 @@ jobs:
         with:
           ref: ${{ github.ref }}
 
+      - name: Prepare variables files
+        uses: canastro/copy-file-action@master
+        with:
+          source: packer/variables.json.example
+          target: variables.json
+
       - name: Validate App template
         uses: hashicorp/packer-github-actions@master
         with:
           command: validate
           target: ./packer/app.json
+          arguments: "--var-file=variables.json"
 
-      - name: Validate Db template
-        uses: hashicorp/packer-github-actions@master
-        with:
-          command: validate
-          target: ./packer/db.json
+      # - name: Validate Db template
+      #   uses: hashicorp/packer-github-actions@master
+      #   with:
+      #     command: validate
+      #     target: ./packer/db.json
 
-      - name: Validate immutable template
-        uses: hashicorp/packer-github-actions@master
-        with:
-          command: validate
-          target: ./packer/immutable.json
+      # - name: Validate immutable template
+      #   uses: hashicorp/packer-github-actions@master
+      #   with:
+      #     command: validate
+      #     target: ./packer/immutable.json
 
-      - name: Validate ubuntu16 template
-        uses: hashicorp/packer-github-actions@master
-        with:
-          command: validate
-          target: ./packer/ubuntu.json
+      # - name: Validate ubuntu16 template
+      #   uses: hashicorp/packer-github-actions@master
+      #   with:
+      #     command: validate
+      #     target: ./packer/ubuntu.json
