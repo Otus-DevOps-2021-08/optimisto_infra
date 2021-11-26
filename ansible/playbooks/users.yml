@@ -4,7 +4,7 @@
   become: true
 
   vars_files:
-    - "{{ inventory_dir }}/credentials.yml"
+    - "{{ playbook_dir }}/../environments/stage/credentials.yml"
 
   tasks:
     - name: create users
